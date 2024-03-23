@@ -39,51 +39,45 @@ const newUrl = document.querySelector('#newUrl');
 const keys = document.querySelector('#keys');
 const siteCategory = document.querySelector('#siteCategory');
 const allInput = [scienceInput, technologyInput, educationInput];
+
 let arraySites = [];
 let scienceSites = [
     {
         url: "https://www.nasa.gov",
         keyWord: 'NASA',
-        like: 0,
-        dislike: 0
+        like: 0
     },
     {
         url: "https://www.nature.com",
         keyWord: 'nature,природа',
-        like: 0,
-        dislike: 0
+        like: 0
     }
 ];
 let educationSites = [
     {
         url: "https://spbu.ru/",
         keyWord: 'Санкт-Петербургский государственный университет, СПбГУ',
-        like: 0,
-        dislike: 0
+        like: 0
     },
     {
         url: "https://msu.ru/",
         keyWord: 'МГУ, Московский государственный университет имени М. В. Ломоносова',
-        like: 0,
-        dislike: 0
+        like: 0
     }
 ];
 let technologySites = [
     {
         url: "https://ntcontest.ru/",
         keyWord: 'НАЦИОНАЛЬНАЯ ТЕХНОЛОГИЧЕСКАЯ ОЛИМПИАДА, наука, технология',
-        like: 0,
-        dislike: 0
+        like: 0
     },
     {
         url: "https://newtechology.mkgtu.ru/jour",
         keyWord: 'Научный журнал, Новые технологии ',
-        like: 0,
-        dislike: 0
+        like: 0
     }
 ];
-
-
+const allSite = scienceSites.concat(...educationSites, ...technologySites);
 
 //отрисовка массива с сайтами
 function displaySites(arraySites) {
@@ -94,7 +88,6 @@ function displaySites(arraySites) {
         btnLike.onclick = () => like(site);
         btnLike.className='btnLike';
         infoSite.append(btnLike);
-        const allSite = scienceSites.concat(...educationSites, ...technologySites);
         const needSite = allSite.find(need=> need.url==site);
         const infoLike = document.createElement('span');
         infoLike.textContent = `Понравилось ${needSite.like}`;
@@ -103,7 +96,6 @@ function displaySites(arraySites) {
     })
 };
 function like(needUrl){
-    const allSite = scienceSites.concat(...educationSites, ...technologySites);
     const needSite = allSite.find(need=> need.url==needUrl);
     needSite.like++;  
     console.log (needSite);
@@ -138,11 +130,11 @@ addSite.addEventListener('click', (event) => {
         url: newUrl.value.trim(),
         keyWord: keys.value.trim(),
         like: 0,
-        dislike: 0
     };
     siteCategory.value === 'наука' && scienceSites.push(newSite);
     siteCategory.value === 'образование' && educationSites.push(newSite);
     siteCategory.value === 'технология' && technologySites.push(newSite);
+    allSite.push(newSite);
     newUrl.value = '';
     keys.value = '';
     activeChecbox()
@@ -152,7 +144,6 @@ function searchSites() {
     arraySites = [];
     sites.textContent = '';
     allInput.forEach(input => input.checked = false);
-    const allSite = scienceSites.concat(...educationSites, ...technologySites);
     const needSite = allSite
         .filter(site => site.keyWord.toLowerCase().includes(searchInput.value.toLowerCase()))
         .map(site => site.url);
