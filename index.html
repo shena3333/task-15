@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Кондрикова Елена Задача 15 </h1>
+
+    <div>
+        <input type="text" id="searchInput" placeholder="Поиск по сайтам...">
+        <button onclick="searchSites()">Поиск</button>
+    </div>
+
+    <div id="categories">
+        <label for="science">
+            <input type="checkbox" id="science" >
+            наука
+        </label>
+        <label for="education">
+            <input type="checkbox" id="education">
+            образование
+        </label>
+        <label for="technology">
+            <input type="checkbox" id="technology">
+            технология
+        </label>
+    </div>
+    <div id="sites"></div>
+    <form>
+        <h3>Для добавления нового сайта в каталог введите данные:</h3>
+        <input type="text" id="newUrl" placeholder="адрес сайта https://..." required>
+        <select class='' id="siteCategory">
+            <option value="наука">наука</option>
+            <option value="образование">образование</option>
+            <option value="технология">технология</option>
+        </select>
+        <input class='' type="text" id="keys" placeholder="ключевые слова" required>
+        <button class='addSite' type="submit">добавить сайт</button>
+    </form>
+   
+    <script src="script.js"></script>
+</body>
+
+</html>
