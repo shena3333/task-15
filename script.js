@@ -91,6 +91,7 @@ function displaySites(arraySites) {
         const needSite = allSite.find(need => need.url == site);
         const infoLike = document.createElement('span');
         infoLike.textContent = `Понравилось ${needSite.like}`;
+        infoSite.className='infoSite';
         infoSite.append(infoLike);
         sites.append(infoSite)
     })
@@ -98,15 +99,13 @@ function displaySites(arraySites) {
 function like(needUrl) {
     const needSite = allSite.find(need => need.url == needUrl);
     needSite.like++;
-    console.log(needSite);
     sites.textContent = '';
     displaySites(arraySites)
 }
 // отрисовка сайтов по категориям
 allInput.forEach(input => input.addEventListener('click', activeChecbox))
 function activeChecbox() {
-    arraySites = [];
-    sites.textContent = '';
+    cleanSites();
     if (scienceInput.checked) {
         const needSite = scienceSites.map(site => site.url);
         arraySites.push(...needSite);
@@ -139,8 +138,7 @@ addSite.addEventListener('click', (event) => {
 });
 // поиск сайта по ключевым словам
 function searchSites() {
-    arraySites = [];
-    sites.textContent = '';
+    cleanSites();
     allInput.forEach(input => input.checked = false);
     const needSite = allSite
         .filter(site => site.keyWord.toLowerCase().includes(searchInput.value.toLowerCase()))
@@ -153,4 +151,8 @@ function searchSites() {
         displaySites(arraySites)
     };
 };
+function cleanSites() {
+    arraySites = [];
+    sites.textContent = '';
+}
 displaySites(arraySites);
