@@ -83,15 +83,18 @@ const allSite = scienceSites.concat(...educationSites, ...technologySites);
 function displaySites(arraySites) {
     arraySites.map(site => {
         const infoSite = document.createElement('div');
-        infoSite.textContent = `${site}`;
+        const siteUrl = document.createElement('p');
+        siteUrl.textContent = `${site}`;
+        siteUrl.className='siteUrl';
+        infoSite.append(siteUrl);
         const btnLike = document.createElement('button');
         btnLike.onclick = () => like(site);
         btnLike.className = 'btnLike';
         infoSite.append(btnLike);
         const needSite = allSite.find(need => need.url == site);
-        const infoLike = document.createElement('span');
+        const infoLike = document.createElement('p');
         infoLike.textContent = `Понравилось ${needSite.like}`;
-        infoSite.className='infoSite';
+        infoSite.className = 'infoSite';
         infoSite.append(infoLike);
         sites.append(infoSite)
     })
