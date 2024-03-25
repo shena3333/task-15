@@ -86,26 +86,24 @@ function displaySites(arraySites) {
         infoSite.textContent = `${site}`;
         const btnLike = document.createElement('button');
         btnLike.onclick = () => like(site);
-        btnLike.className='btnLike';
+        btnLike.className = 'btnLike';
         infoSite.append(btnLike);
-        const needSite = allSite.find(need=> need.url==site);
+        const needSite = allSite.find(need => need.url == site);
         const infoLike = document.createElement('span');
         infoLike.textContent = `Понравилось ${needSite.like}`;
         infoSite.append(infoLike);
         sites.append(infoSite)
     })
 };
-function like(needUrl){
-    const needSite = allSite.find(need=> need.url==needUrl);
-    needSite.like++;  
-    console.log (needSite);
+function like(needUrl) {
+    const needSite = allSite.find(need => need.url == needUrl);
+    needSite.like++;
+    console.log(needSite);
     sites.textContent = '';
     displaySites(arraySites)
 }
 // отрисовка сайтов по категориям
-scienceInput.addEventListener('click', activeChecbox);
-educationInput.addEventListener('click', activeChecbox);
-technologyInput.addEventListener('click', activeChecbox);
+allInput.forEach(input => input.addEventListener('click', activeChecbox))
 function activeChecbox() {
     arraySites = [];
     sites.textContent = '';
