@@ -40,6 +40,7 @@ const keys = document.querySelector('#keys');
 const siteCategory = document.querySelector('#siteCategory');
 const allInput = [scienceInput, technologyInput, educationInput];
 
+
 let arraySites = [];
 let scienceSites = [
     {
@@ -78,6 +79,7 @@ let technologySites = [
     }
 ];
 const allSite = scienceSites.concat(...educationSites, ...technologySites);
+const allSiteCategory = [scienceSites, technologySites, educationSites];
 
 //отрисовка массива с сайтами
 function displaySites(arraySites) {
@@ -85,7 +87,7 @@ function displaySites(arraySites) {
         const infoSite = document.createElement('div');
         const siteUrl = document.createElement('p');
         siteUrl.textContent = `${site}`;
-        siteUrl.className='siteUrl';
+        siteUrl.className = 'siteUrl';
         infoSite.append(siteUrl);
         const btnLike = document.createElement('button');
         btnLike.onclick = () => like(site);
@@ -109,18 +111,9 @@ function like(needUrl) {
 allInput.forEach(input => input.addEventListener('click', activeChecbox))
 function activeChecbox() {
     cleanSites();
-    if (scienceInput.checked) {
-        const needSite = scienceSites.map(site => site.url);
-        arraySites.push(...needSite);
-    };
-    if (educationInput.checked) {
-        const needSite = educationSites.map(site => site.url);
-        arraySites.push(...needSite);
-    };
-    if (technologyInput.checked) {
-        const needSite = technologySites.map(site => site.url);
-        arraySites.push(...needSite);
-    };
+    const indexOfNeedCategory = allInput.findIndex(input => input.checked);
+    const needSite = allSiteCategory[indexOfNeedCategory].map(site => site.url);
+    arraySites.push(...needSite);
     displaySites(arraySites)
 };
 //добавление нового сайта
@@ -150,7 +143,6 @@ function searchSites() {
         sites.textContent = 'По вашему запросу ничего не найдено. Уточните запрос.'
     } else {
         arraySites.push(...needSite);
-        console.log(needSite)
         displaySites(arraySites)
     };
 };
